@@ -1,0 +1,8 @@
+---
+# This file is read by .github/workflows/pr-labeler.yml
+feature ✨: ["feat*"]
+fix 🔧: ["fix*"]
+hotfix 🔧: ["hotfix*"]
+chore 🔨: ["chore*"]
+docs 📚: ["doc*"]
+ci: ["ci*"]

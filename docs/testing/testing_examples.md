@@ -2,9 +2,10 @@
 
 [Testing Concepts](testing_concepts.md)
 
-> [!Tips]
-> Use `go test ./...` to run the entire test suite, `./...` is a special wildcard that when used in conjuction with the `go test` command allows the test runner to run all test test of the current directory and all its subdirectories (assuming that those subdirecotries contain subpackages).
+> [!Tip]
 >
+> - Use `go test ./...` to run the entire test suite, `./...` is a special wildcard that when used in conjuction with the `go test` command allows the test runner to run all test test of the current directory and all its subdirectories (assuming that those subdirecotries contain subpackages).
+> - Run `go help packages` to get help related to packages on the command line.
 
 ## Examples
 

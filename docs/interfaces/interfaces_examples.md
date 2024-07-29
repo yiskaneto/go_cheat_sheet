@@ -10,6 +10,7 @@
     - [Example 2: interface of any type](#example-2-interface-of-any-type)
     - [Example 3: Assert Interface Type](#example-3-assert-interface-type)
     - [Example 4: Interface Composition](#example-4-interface-composition)
+    - [Example 5: Errors on Interfaces](#example-5-errors-on-interfaces)
 
 ### Example 1: Shape Interface
 
@@ -168,4 +169,40 @@ func main() {
 
 	geometryDimensions(rect)
 	geometryDimensions(square)
+```
+
+### Example 5: Errors on Interfaces
+
+```go
+// Create a struct containing a msg field
+type CalculationError struct {
+	msg string
+}
+
+func (ce CalculationError) Error() string {
+	if ce.msg == "" {
+		return "msg field is empty"
+	}
+	return ce.msg
+}
+
+func (ce CalculationError) Info() string {
+	return ce.msg
+}
+
+// One thing I didn't fully get is how by passing the CalculationError{msg: "Invalid input"} struct instance on the performCalculation() the performCalculation() would use the Error() method of the CalculationError struct, I would've thought that we would need to call the Error() method of the struct but this is not the case, so what I gather with this is that the compiler implicitly deduces that since we are returning a value of type error and because we're using the CalculationError{msg: "Invalid input value"} struct instance as its return value it "sees" that this struct instance has a method that implements the Error() function and hence it uses it.  So this is some sort of implicit default method for specific type returns or something like that, I honestly don't no how to refer to this behavior, I had no knowledge if this behavior but is good to know.
+
+func performPowCalculation(val float64) (float64, error) {
+	if val < 1 {
+		return 0, CalculationError{}
+		// it could also be:
+		// return 0, CalculationError{msg: "Invalid input value"}
+	}
+	return math.Pow(val, 4), nil
+}
+
+func main() {
+	fmt.Println(performPowCalculation(4))
+	fmt.Println(performPowCalculation(0))
+}
 ```
